@@ -12,8 +12,8 @@ from mp3 import get_bitrate
 
 
 parser = argparse.ArgumentParser('Download loved lastfm tracks from vk.com')
-#parser.add_argument('--lastfm-user', dest='lastfm_user', required=True,
-#    help='Username for LstFM')
+parser.add_argument('--lastfm-user', dest='lastfm_user', required=True,
+    help='Username for LstFM')
 parser.add_argument('--min-bitrate', dest='min_bitrate', required=False,
     help='Minimal bitrate for files', type=int, default=128000)
 parser.add_argument('--out-dir', dest='out_dir', required=False,
@@ -28,7 +28,7 @@ if __name__ == '__main__':
     else:
         mkdir(args.out_dir)
     vk_api = get_api_instance()
-    for loved_track in get_loved_tracks('ComradeDOS' or args.lastfm_user):
+    for loved_track in get_loved_tracks(args.lastfm_user):
         artist = loved_track.track.artist.name
         title = loved_track.track.title
         query = '%s - %s' % (artist, title)
